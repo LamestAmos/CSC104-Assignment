@@ -1,5 +1,6 @@
 * {
   padding: 0;
+  margin: 0;
   box-sizing: border-box;
 }
 
@@ -8,13 +9,16 @@ body {
   display: flex;
   flex-direction: column;
   padding: 1.5rem;
-  overflow: hidden;
 }
 
 button {
   cursor: pointer;
-  padding: 0.25rem;
+  padding: 0.25rem 0.5rem;
   border: 1px solid black;
+  transition:
+    scale 150ms,
+    background-color 200ms,
+    color 200ms;
 
   &:hover {
     background-color: #333;
@@ -29,6 +33,11 @@ button {
 main {
   display: flex;
   gap: 2rem;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
 
 #shop {
@@ -45,6 +54,7 @@ main {
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 0.75rem;
 
       img {
         border-radius: 0.25rem;
@@ -55,5 +65,26 @@ main {
       grid-template-columns: repeat(2, 1fr);
       gap: 0.5rem;
     }
+  }
+}
+
+#cart {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 3px solid black;
+  max-height: max-content;
+  width: 100%;
+
+  h2,
+  h4 {
+    margin-block: 1.5rem;
+    text-align: center;
+  }
+
+  div:has(button) {
+    display: flex;
+    gap: 1rem;
   }
 }
