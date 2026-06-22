@@ -7,6 +7,7 @@ let dummyShop = Array.from({ length: 5 }, (_, i) => ({
 
 const products = [...document.querySelectorAll(".product")];
 const cart = document.querySelector("#cart");
+const cartContent = cart.querySelector(".content");
 
 products.forEach((product, i) =>
   product.querySelector("button").addEventListener("click", () => {
@@ -19,8 +20,14 @@ products.forEach((product, i) =>
   }),
 );
 
-cart.querySelector(".content").addEventListener("click", (e) => {
+cartContent.addEventListener("click", (e) => {
   if (!e.target.matches("button")) return;
+  dummyShop = dummyShop.map((s) => {
+    if (s.id === e.target.parentElement.dataset.id) return s;
+    s.added = false;
+    return s;
+  });
+  updateCart();
 });
 
 function updateCart() {
@@ -29,6 +36,7 @@ function updateCart() {
   const cartItems = addedItems.map((item) => {
     const div = document.createElement("div");
     div.classList.add("cart-item");
+    div.dataset.id = item.id;
 
     const itemTitle = document.createElement("h3");
     itemTitle.textContent = item.name;
@@ -47,5 +55,5 @@ function updateCart() {
     return div;
   });
 
-  cart.querySelector(".content").replaceChildren(...cartItems);
+  cartContent.replaceChildren(...cartItems);
 }
