@@ -22,6 +22,8 @@ const questions = [
   },
 ];
 
+const correctQuestions = [];
+
 let questionIndex = 0;
 const nextBtn = document.querySelector(".next-btn");
 const prevBtn = document.querySelector(".prev-btn");
