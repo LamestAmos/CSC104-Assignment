@@ -22,7 +22,8 @@ const questions = [
   },
 ];
 
-const correctQuestions = [];
+const guesses = [];
+const answered = [];
 
 let questionIndex = 0;
 const nextBtn = document.querySelector(".next-btn");
@@ -44,7 +45,11 @@ prevBtn.addEventListener("click", () => {
 questionCard.addEventListener("click", (e) => {
   if (!e.target.matches("button")) return;
   const answer = e.target.innerText.charAt(0);
-  console.log(checkAnswer(answer));
+  if (!answered.includes(questionIndex)) {
+    guesses[questionIndex] = checkAnswer(answer);
+  }
+  answered[questionIndex] = questionIndex;
+  update();
 });
 
 function updateControls() {
@@ -56,6 +61,12 @@ function updateQuestion() {
   const question = questions[questionIndex];
   if (!question) return;
   const { title, answer, options, info = "" } = question;
+  const guess = guesses[questionIndex];
+  questionCard.classList.toggle(
+    "answered",
+    guess !== null && guess !== undefined,
+  );
+  questionCard.classList.toggle("correct", !!guess);
   questionCard.innerHTML = `
         <h2>${questionIndex + 1}.</h2>
         <h3>${title}</h3>

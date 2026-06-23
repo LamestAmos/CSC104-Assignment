@@ -55,12 +55,14 @@ main {
 }
 
 .question-card {
-  padding: 0.25rem;
+  padding: 0.5rem;
   width: 70%;
   position: absolute;
   top: 50%;
   left: 50%;
   translate: -50% -50%;
+  border: 2px solid black;
+  border-radius: 8px;
 
   ul {
     list-style: none;
@@ -79,5 +81,18 @@ main {
       background-color: #333;
       color: azure;
     }
+  }
+
+  &.answered {
+    background-color: red;
+
+    .option {
+      background-color: #ccc;
+      color: #aaa;
+    }
+  }
+
+  &.correct {
+    background-color: green;
   }
 }
