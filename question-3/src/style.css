@@ -14,12 +14,10 @@ body {
 main {
   width: 95%;
   margin: 0 auto;
-}
-
-.controls {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  place-items: center;
+  grid-template-rows: 1fr auto;
 }
 
 .btn {
@@ -54,13 +52,20 @@ main {
   }
 }
 
+.submit-btn {
+  grid-column-start: 2;
+  padding: 0.25rem 0.5rem;
+  margin: 1rem auto;
+  grid-column-end: 2;
+}
+
+.hidden {
+  opacity: 0;
+}
+
 .question-card {
   padding: 0.5rem;
-  width: 70%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
+  width: 90%;
   border: 2px solid black;
   border-radius: 8px;
 
@@ -84,7 +89,7 @@ main {
   }
 
   &.answered {
-    background-color: red;
+    background-color: lightcoral;
 
     .option {
       background-color: #ccc;
@@ -93,6 +98,6 @@ main {
   }
 
   &.correct {
-    background-color: green;
+    background-color: limegreen;
   }
 }

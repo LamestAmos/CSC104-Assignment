@@ -23,11 +23,11 @@ const questions = [
 ];
 
 const guesses = [];
-const answered = [];
 
 let questionIndex = 0;
 const nextBtn = document.querySelector(".next-btn");
 const prevBtn = document.querySelector(".prev-btn");
+const submitBtn = document.querySelector(".submit-btn");
 const questionCard = document.querySelector(".question-card");
 
 update();
@@ -42,19 +42,30 @@ prevBtn.addEventListener("click", () => {
   update();
 });
 
+submitBtn.addEventListener("click", (e) => {
+  if (
+    guesses.length < questions.length ||
+    e.target.classList.contains("hidden")
+  ) {
+    return;
+  }
+
+  alert(`Score: ${guesses.filter((guess) => !!guess).length}`);
+});
+
 questionCard.addEventListener("click", (e) => {
   if (!e.target.matches("button")) return;
   const answer = e.target.innerText.charAt(0);
-  if (!answered.includes(questionIndex)) {
-    guesses[questionIndex] = checkAnswer(answer);
-  }
-  answered[questionIndex] = questionIndex;
+  if (guesses[questionIndex] !== null && guesses[questionIndex] !== undefined)
+    return;
+  guesses[questionIndex] = checkAnswer(answer);
   update();
 });
 
 function updateControls() {
   nextBtn.disabled = questionIndex >= questions.length - 1;
   prevBtn.disabled = questionIndex <= 0;
+  submitBtn.classList.toggle("hidden", questionIndex < questions.length - 1);
 }
 
 function updateQuestion() {
